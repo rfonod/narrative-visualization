@@ -1,0 +1,214 @@
+div {
+    display: block;
+    margin: auto;
+}
+
+div#scatterDivId {
+    display: block;
+    margin: auto;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+svg {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 11pt;
+    background-color: rgb(244, 249, 249);
+    display: block;
+    margin: auto;
+    padding: 1%;
+    position: relative;
+    width: 85%;
+    border: 0px solid#51a05b70;
+    border-radius: 5px;
+}
+
+.tooltip {
+    position: absolute;
+    text-align: left;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 8pt;
+    font-weight: bold;
+    color: white;
+    background: rgb(56, 58, 55);
+    border: solid;
+    border-color: black;
+    border-width: 1px;
+    border-radius: 4px;
+    pointer-events: none;
+    padding: 8px;
+}
+
+.annotation {
+    animation: blinker 8s linear infinite;
+    animation-direction: alternate;
+    text-align: left;
+    font-family: Georgia, Helvetica, sans-serif, Arial;
+    font-size: 9pt;
+    font-weight: 400;
+    fill: rgb(255, 115, 0);
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
+
+.legendtext {
+    font-size: 7pt;
+    font-weight: bold;
+    text-anchor: middle;
+}
+
+#buttonsDivId {
+    margin: auto;
+    position: relative;
+    text-align: center;
+}
+
+button {
+    background-color: #59b465be;
+    color: #252c25e3;
+    font-weight: 700;
+    outline: rgb(65, 143, 107);
+    cursor: pointer;
+    padding: 0.5%;
+    font-size: 13px;
+    border-radius: 5px;
+}
+
+.btn {
+    width: 150px;
+}
+
+button:hover {
+    background-color: #477c4a6b;
+    color: black;
+}
+
+.btn-summer {
+    background-color: #FFFE6F;
+}
+
+.btn-summer:hover {
+    background-color: #ffff6f5d;
+    color: black;
+}
+
+.btn-winter {
+    background-color: #B3DAF1;
+}
+
+.btn-winter:hover {
+    background-color: #b3daf17a;
+    color: black;
+}
+
+.btn-home {
+    background-color: #fdc34ed5;
+}
+
+.btn-home:hover {
+    background-color: #ffcc6671;
+    color: black;
+}
+
+button:disabled,
+button[disabled] {
+    background-color: #a1a1a18c;
+    color: #666666ad;
+}
+
+#venueDivId h2 {
+    font-family: 'Helvetica Neue', Helvetica, Roboto, Ubuntu, Oxygen, Impact, Charcoal, sans-serif;
+    text-align: center;
+    width: 85%;
+    padding: 1%;
+    position: relative;
+    color: #293929;
+    font-size: 110%;
+    line-height: 60%;
+    margin: auto;
+    border-radius: 5px;
+    background: #51a05b70;
+    border: 0px solid#51a05b70;
+}
+
+#yearsDivId p {
+    font-family: Helvetica, Charcoal, sans-serif, Arial;
+    text-align: center;
+    width: 85%;
+    padding: 1%;
+    position: relative;
+    color: #293929;
+    font-size: 85%;
+    margin: auto;
+}
+
+p {
+    font-family: 'Helvetica Neue', Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif, Times, serif;
+    font-size: 90%;
+    text-align: center;
+    width: 60%;
+    margin: auto;
+}
+
+#footer p {
+    font-family: Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Times, serif;
+    font-size: 80%;
+    text-align: center;
+    width: 100%;
+    padding: 0%;
+    font-weight: 400;
+    position: fixed;
+    color: rgb(73, 57, 57);
+    margin: auto;
+    bottom: 0;
+}
+
+#header h1,
+h4 {
+    width: auto;
+    display: table;
+    text-align: center;
+    color: #293929;
+    margin: auto;
+    height: 60%;
+    line-height: 100%;
+    padding: 1%;
+    position: relative;
+    font-family: Impact, Roboto, Charcoal, sans-serif;
+    font-size: 170%;
+}
+
+#header h4 {
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Times, serif;
+    font-style: italic;
+    font-size: 100%;
+}
+
+circle {
+    stroke: black;
+    stroke-width: 0.5;
+    shape-rendering: geometricPrecision;
+}
+
+.axis line {
+    stroke: #808080;
+    shape-rendering: crispEdges;
+}
+
+.axis path {
+    stroke: #808080;
+}
+
+.axis text {
+    stroke: black;
+}
