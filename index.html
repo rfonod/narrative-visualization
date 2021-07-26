@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name='author' content='Robert Fonod'>
+    <title>The Narrative of Modern Olympic Games</title>
+    <!-- Load css files -->
+    <link rel='stylesheet' type='text/css' href='css/style.css'>
+    <!-- Load d3.js libraries -->
+    <script src='https://d3js.org/d3.v4.min.js'></script>
+    <!-- Load custom scripts -->
+    <script type="text/javascript" src='js/chart.js' charset='utf-8'></script>
+    <script type="text/javascript" src='js/index.js' charset='utf-8'></script>
+</head>
+
+<body>
+    <div id='header'>
+        <h1 style="text-align:center">Is the message of modern Olympics still valid?</h1>
+    </div>
+    <div id='introDivId'>
+        <p style="text-align:center;"><img src="img/rings.jpeg" alt="The five-ringed symbol of the Olympic Games" style="height:140px;"></p>
+        <p> Pierre de Coubertin, founder of the modern Olympic Games and the International Olympic Committee, believed that the early ancient Olympics encouraged competition among amateur rather than professional athletes, and saw value in that. Does the
+            country's population and/or economic prosperity play a role in suceeding in Olympics? Does the role of hosting country matter at all?</p>
+    </div>
+    <br>
+    <br>
+    <div id='buttonsDivId'>
+        <button id="bp" type="button " class="btn btn-default" style="visibility : hidden" onclick="previousScene() ">&laquo; Previous Olympics</button>
+        <button id="bs" type="button " class="btn-summer btn-default" onclick="summerOlympics() ">Explore Summer Olympics</button>
+        <button id="bh" type="button " class="btn-home btn-default" style="visibility : hidden" onclick="homeScene() "></button>
+        <button id="bw" type="button " class="btn-winter btn-default" onclick="winterOlympics() ">Explore Winter Olympics</button>
+        <button id="bn" type="button " class="btn btn-default" style="visibility : hidden" onclick="nextScene() ">Next Olympics &raquo;</button>
+    </div>
+    <div id='yearsDivId'></div>
+    <div id="venueDivId"></div>
+    <div id='scatterDivId'></div>
+    <br>
+    <div id="footer">
+        <p>&copy; 2021 by Robert Fonod. All right reserved.</p>
+    </div>
+</body>
+
+</html>

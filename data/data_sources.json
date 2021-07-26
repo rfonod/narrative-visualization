@@ -1,0 +1,7 @@
+{
+    "dictionary.csv" : "https://www.kaggle.com/the-guardian/olympic-games?select=dictionary.csv",
+    "country2continent.csv" :
+        "https://github.com/dbouquin/IS_608/blob/master/NanosatDB_munging/Countries-Continents.csv",
+    "summer.csv" : "https://www.kaggle.com/the-guardian/olympic-games?select=summer.csv",
+    "winter.csv" : "https://www.kaggle.com/the-guardian/olympic-games?select=winter.csv"
+}
