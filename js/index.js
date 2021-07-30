@@ -73,7 +73,10 @@ function nextScene() {
         updateVenue(sceneId);
         loadChart1(sceneId);
         loadChart2(sceneId);
-        document.getElementById("bn").disabled = false;
+        setTimeout(function() {
+            document.getElementById("bn").disabled = false;
+        }, 250);
+
     }
     if (sceneId >= numberOfGames) {
         document.getElementById("bn").disabled = true;
