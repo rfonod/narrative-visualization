@@ -57,7 +57,9 @@ function previousScene() {
         clearVenueYearsChart();
         loadChart1(sceneId);
         loadChart2(sceneId);
-        document.getElementById("bp").disabled = false;
+        setTimeout(function() {
+            document.getElementById("bp").disabled = false;
+        }, 200);
     }
     if (sceneId == 1) {
         document.getElementById("bp").disabled = true;
@@ -75,7 +77,7 @@ function nextScene() {
         loadChart2(sceneId);
         setTimeout(function() {
             document.getElementById("bn").disabled = false;
-        }, 250);
+        }, 200);
 
     }
     if (sceneId >= numberOfGames) {
