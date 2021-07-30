@@ -11,7 +11,8 @@
     <!-- Load d3.js libraries -->
     <script src='https://d3js.org/d3.v4.min.js'></script>
     <!-- Load custom scripts -->
-    <script type="text/javascript" src='js/chart.js' charset='utf-8'></script>
+    <script type="text/javascript" src='js/chart_scatter.js' charset='utf-8'></script>
+    <script type="text/javascript" src='js/chart_bar.js' charset='utf-8'></script>
     <script type="text/javascript" src='js/index.js' charset='utf-8'></script>
 </head>
 
@@ -25,7 +26,6 @@
             country's population and/or economic prosperity play a role in suceeding in Olympics? Does the role of hosting country matter at all?</p>
     </div>
     <br>
-    <br>
     <div id='buttonsDivId'>
         <button id="bp" type="button " class="btn btn-default" style="visibility : hidden" onclick="previousScene() ">&laquo; Previous Olympics</button>
         <button id="bs" type="button " class="btn-summer btn-default" onclick="summerOlympics() ">Explore Summer Olympics</button>
@@ -36,6 +36,7 @@
     <div id='yearsDivId'></div>
     <div id="venueDivId"></div>
     <div id='scatterDivId'></div>
+    <div id='barDivId'></div>
     <br>
     <div id="footer">
         <p>&copy; 2021 by Robert Fonod. All right reserved.</p>

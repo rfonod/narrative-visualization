@@ -6,8 +6,6 @@ var olympics = 0; // {0 - summer; 1 - winter}
 var dataPath = '';
 var venuePath = '';
 
-
-
 function homeScene() {
     sceneId = 0;
     document.getElementById("bp").style.visibility = 'hidden';
@@ -53,10 +51,13 @@ function initVisualization() {
 function previousScene() {
     if (sceneId > 1) {
         sceneId -= 1;
+        document.getElementById("bp").disabled = true;
         document.getElementById("bn").disabled = false;
         updateVenue(sceneId);
         clearVenueYearsChart();
-        loadChart(sceneId);
+        loadChart1(sceneId);
+        loadChart2(sceneId);
+        document.getElementById("bp").disabled = false;
     }
     if (sceneId == 1) {
         document.getElementById("bp").disabled = true;
@@ -67,9 +68,12 @@ function nextScene() {
     if (sceneId < numberOfGames) {
         sceneId += 1;
         document.getElementById("bp").disabled = false;
+        document.getElementById("bn").disabled = true;
         clearVenueYearsChart();
         updateVenue(sceneId);
-        loadChart(sceneId);
+        loadChart1(sceneId);
+        loadChart2(sceneId);
+        document.getElementById("bn").disabled = false;
     }
     if (sceneId >= numberOfGames) {
         document.getElementById("bn").disabled = true;
@@ -83,6 +87,7 @@ function clearVenueYearsChart() {
     d3.select("#venueDivId").selectAll('h2').remove();
     d3.select("#yearsDivId").selectAll('p').remove();
     document.getElementById("scatterDivId").innerHTML = "";
+    document.getElementById("barDivId").innerHTML = "";
 }
 
 function updateVenue(olympicId) {
@@ -103,14 +108,21 @@ function updateVenue(olympicId) {
         yearText = '<p><b>' + olympicsType + ' Olympic games:</b> ';
 
         for (var i = 0; i < data.length; i++) {
-            yearText_i = data[i].Year;
-            if (olympicId == data[i].ID) {
+            if (data[i].ID < olympicId) {
+                yearText_i = '<b style="background-color : ' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">') + data[i].Year + '</b>';
+            } else if (data[i].ID == olympicId) {
                 d3.select("#venueDivId").insert("h2").text(olympicsType + ' Olympics in ' + data[i].City + ' (' +
                     data[i].Year + ')').style('background', olympics ? '#B3DAF1' : '#FFFE6F');
-                yearText_i = '<b style="border:2px; border-style:solid; border-color:#FF0000; border-radius: 3px;">' + yearText_i + '</b>';
+                yearText_i = '<b style="border:2px; border-style:solid; border-color:#FF0000; border-radius: 3px; background-color :' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">') + data[i].Year + '</b>';
                 window.hostCountry = data[i].Country;
+            } else {
+                yearText_i = data[i].Year;
             }
-            yearText_i += (i < data.length - 1) ? ' | ' : '';
+            if (data[i].ID < olympicId) {
+                yearText_i += '<b style="background-color : ' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">') + ((i < data.length - 1) ? ' | ' : '') + '</b>';
+            } else {
+                yearText_i += (i < data.length - 1) ? ' | ' : '';
+            }
             yearText += yearText_i;
         }
         yearText += '</p>';

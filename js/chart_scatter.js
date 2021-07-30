@@ -1,4 +1,4 @@
-function loadChart(olympicId) {
+function loadChart1(olympicId) {
     // Get current browser window dimensions
     var w = window,
         d = document,
@@ -11,7 +11,7 @@ function loadChart(olympicId) {
     const width = 0.85 * x_size;
     const height = (0.5 * x_size < 0.62 * y_size) ? 0.5 * x_size : 0.62 * y_size;
     const canvas = { width: width, height: height };
-    const margin = { left: 65, right: 50, top: 12, bottom: 47 };
+    const margin = { left: 65, right: 50, top: 12, bottom: 35 };
     const chart = {
         width: canvas.width - (margin.right + margin.left),
         height: canvas.height - (margin.top + margin.bottom)
@@ -26,9 +26,9 @@ function loadChart(olympicId) {
         .attr("width", canvas.width)
         .attr("height", canvas.height)
         .style("background-color", olympics ? '#b3daf117' : '#ffff6f07')
-        .call(d3.zoom().on("zoom", function() {
-            svg.attr("transform", d3.event.transform)
-        }))
+        //.call(d3.zoom().on("zoom", function() {
+        //svg.attr("transform", d3.event.transform)
+        //}))
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -37,6 +37,12 @@ function loadChart(olympicId) {
     d3.csv(dataPath, function(error, data) {
         if (error) throw error;
 
+        data = data.filter(
+            function(d) {
+                return (getPopulation(d) !== 0 && getGDPperCapita(d) !== 0 && computeTotalMedails(d) !== 0);
+            }
+        )
+
         // Calculate the extreme values for the selected olympics
         var pop_minmax = getMinMaxPopulation(data);
         var gdp_minmax = getMinMaxGDP(data);
@@ -44,7 +50,6 @@ function loadChart(olympicId) {
         var continents = getContinentsList(data);
 
         // Extract and modify the extreme values for the selected olympics
-        console.log(pop_minmax[0])
         var pop_min_round = (pop_minmax[0] > 1) ? 1 : 0.1;
         var pop_min = Math.max(0.01, Math.floor(pop_minmax[0] / pop_min_round) * pop_min_round); // min population rounded down to the closest 0.1/1 milion + log protection
         var pop_max = Math.ceil(pop_minmax[1] / 100) * 100; // max population rounded up to the closest 100 milion
@@ -113,17 +118,7 @@ function loadChart(olympicId) {
             .transition().duration(2000)
             .call(xAxis);
 
-        // Add Y axis
-        // var yTickValAll = [10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000];
-        // let yTickVal = [];
-        // for (let i = 0; i < yTickValAll.length; i++) {
-        //     if (yTickValAll[i] >= gdp_min && yTickValAll[i] <= gdp_max) {
-        //         yTickVal.push(yTickValAll[i]);
-        //     }
-        // }
-
         var yAxis = d3.axisLeft(y)
-            //.tickValues(yTickVal)
             .tickFormat(d3.format(',.2r'));
 
         svg.append("g")
@@ -133,7 +128,7 @@ function loadChart(olympicId) {
 
         // Add X and Y labels
         svg.append('g')
-            .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + margin.top + 30) + ')')
+            .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + margin.top + margin.bottom - 20) + ')')
             .append('text')
             .style("opacity", 0).transition().duration(2000).style("opacity", 1)
             .attr("class", "x label")
@@ -141,22 +136,17 @@ function loadChart(olympicId) {
             .text("Population (in milions, log scale)");
 
         svg.append('g')
-            .attr('transform', 'translate(' + -50 + ', ' + (chart.height / 2 + margin.top) + ')')
+            .attr('transform', 'translate(' + (-margin.left + 15) + ', ' + (chart.height / 2 + margin.top) + ')')
             .append('text')
             .attr("class", "y label")
             .attr('text-anchor', 'middle')
             .attr("transform", "rotate(-90)")
-            .text("GDP per capita (in USD)")
+            .text("GDP per Capita (in USD)")
             .style("opacity", 0).transition().duration(2000).style("opacity", 1);
 
         // Add circles
-        var dots = svg.append('g')
-            .selectAll("dot")
-            .data(data.filter(
-                function(d) {
-                    return (getPopulation(d) !== 0 && getGDPperCapita(d) !== 0 && computeTotalMedails(d) !== 0);
-                }
-            ))
+        var dots = svg.selectAll("circle")
+            .data(data)
             .enter()
             .append("circle")
             .attr("class", "datapoints")
@@ -180,11 +170,7 @@ function loadChart(olympicId) {
         // Add country codes
         svg.append('g')
             .selectAll("text")
-            .data(data.filter(
-                function(d) {
-                    return (getPopulation(d) !== 0 && getGDPperCapita(d) !== 0 && computeTotalMedails(d) !== 0);
-                }
-            ))
+            .data(data)
             .enter()
             .append("text")
             .attr("class", "datapoints")
@@ -206,7 +192,7 @@ function loadChart(olympicId) {
             });
 
         colorLegend.append("circle")
-            .attr("cx", chart.width + 10)
+            .attr("cx", chart.width - 8)
             .attr("r", 7)
             .style("fill", function(d) { return c(d); })
             .style("stroke-width", 0)
@@ -215,7 +201,7 @@ function loadChart(olympicId) {
             .style("opacity", 0).transition().delay(2500).duration(2000).style("opacity", 0.8);
 
         colorLegend.append("text")
-            .attr("x", chart.width - 3)
+            .attr("x", chart.width - 20)
             .attr("y", 0)
             .attr("dy", ".35em")
             .style("text-anchor", "end")
@@ -279,7 +265,7 @@ function loadChart(olympicId) {
             .attr("x", xAnnotation)
             .attr("y", yAnnotation)
             .attr("class", "annotation")
-            .text("Tip 1: hover over the bubles for more details; Tip 2: hover over the color legend to filter continents; Tip 3: scroll to zoom")
+            .text("Tip 1: hover over the bubles for more details; Tip 2: hover over the color legend to filter continents")
             .style("opacity", 0).transition().delay(7000).duration(2000).style("opacity", 0.8);
 
         // Add annotations (Max medals)
@@ -301,7 +287,7 @@ function loadChart(olympicId) {
             .attr('y1', function(d) { return y(getGDPperCapita(d)); })
             .attr('y2', function(d) { return yMaxcountry; })
             .attr('stroke', 'black')
-            .style('stroke-opacity', 0).transition().delay(5000).duration(2000).style('stroke-opacity', 0.5)
+            .style('stroke-opacity', 0).transition().delay(4000).duration(2000).style('stroke-opacity', 0.5)
             .attr("stroke-width", 0.5)
             .style('stroke-dasharray', ('1,1'))
 
@@ -313,7 +299,7 @@ function loadChart(olympicId) {
             .style("font-size", '9pt')
             .style('text-decoration', "underline")
             .style('text-anchor', "middle")
-            .style("fill-opacity", 0).transition().delay(5500).duration(2000).style("fill-opacity", 0.5);
+            .style("fill-opacity", 0).transition().delay(4500).duration(2000).style("fill-opacity", 0.5);
 
         // Add annotations (Hosting country)
         var xHostingcountry = chart.width / 3;
@@ -334,7 +320,7 @@ function loadChart(olympicId) {
             .attr('y1', function(d) { return y(getGDPperCapita(d)); })
             .attr('y2', function(d) { return yHostingcountry; })
             .attr('stroke', 'black')
-            .style('stroke-opacity', 0).transition().delay(5000).duration(2000).style('stroke-opacity', 0.5)
+            .style('stroke-opacity', 0).transition().delay(4000).duration(2000).style('stroke-opacity', 0.5)
             .attr("stroke-width", 0.5)
             .style('stroke-dasharray', ('1,1'))
 
@@ -346,7 +332,7 @@ function loadChart(olympicId) {
             .style("font-size", '9pt')
             .style('text-decoration', "underline")
             .style('text-anchor', "middle")
-            .style("fill-opacity", 0).transition().delay(5500).duration(2000).style("fill-opacity", 0.5);
+            .style("fill-opacity", 0).transition().delay(4500).duration(2000).style("fill-opacity", 0.5);
 
     })
 
@@ -461,7 +447,7 @@ function loadChart(olympicId) {
         htmlInfo = "<b>Country:</b> " + d.Country + '<br>' +
             "&emsp;&#8226;<b>&emsp;Population:</b> " + d3.format(',.3s')(getPopulation(d) * 1e6).replace(/G/, "B") + '<br>' +
             "&emsp;&#8226;<b>&emsp;GDP per Capita:</b> " + "$" + d3.format(',.3s')(getGDPperCapita(d)) + '<br><br>' +
-            "<b>Medals total:</b> " + totalMedals + '<br>' +
+            "<b>Total medals won in these Olympics:</b> " + totalMedals + '<br>' +
             "&emsp;&#8226;<b>&emsp;Gold medals:</b> " + gold + '<br>' +
             "&emsp;&#8226;<b>&emsp;Silver medals:</b> " + silver + '<br>' +
             "&emsp;&#8226;<b>&emsp;Bronz medals:</b> " + bronze;
