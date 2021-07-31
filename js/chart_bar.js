@@ -92,7 +92,7 @@ function loadChart2(olympicId) {
         svg.append("g")
             .attr("transform", "translate(0," + chart.height + ")")
             .attr("class", "x axis")
-            .transition().duration(2000)
+            .transition().delay(3500).duration(1500)
             .call(d3.axisBottom(x))
             .selectAll("text");
         //.attr("transform", "translate(-10,8)rotate(-45)")
@@ -100,14 +100,14 @@ function loadChart2(olympicId) {
 
         svg.append("g")
             .attr("class", "y axis")
-            .transition().duration(2000)
+            .transition().delay(3500).duration(1500)
             .call(d3.axisLeft(y));
 
         // Add X and Y labels
         svg.append('g')
             .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + margin.top + 42) + ')')
             .append('text')
-            .style("opacity", 0).transition().duration(2000).style("opacity", 1)
+            .style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1)
             .attr("class", "x label")
             .attr('text-anchor', 'middle')
             .text("Cumulative medal count");
@@ -119,7 +119,7 @@ function loadChart2(olympicId) {
             .attr('text-anchor', 'middle')
             .attr("transform", "rotate(-90)")
             .text("Country")
-            .style("opacity", 0).transition().duration(2000).style("opacity", 1);
+            .style("opacity", 0).transition().delay(3500).duration(2000).style("opacity", 1);
 
         // Add bars
         var bars = svg.append('g')
@@ -137,7 +137,7 @@ function loadChart2(olympicId) {
 
         // Add lenght transitions
         bars.transition()
-            .delay(4000)
+            .delay(3750)
             .duration(4000)
             .attr('width', function(d) { return x(computeTotalCumulativeMedails(d, olympicId)); });
 
@@ -152,7 +152,7 @@ function loadChart2(olympicId) {
             .data(data)
             .enter()
             .append("text")
-            .attr("class", "bar")
+            .attr("class", "datapoints")
             .attr("x", function(d) { return x(computeTotalCumulativeMedails(d, olympicId)); })
             .attr("y", function(d) { return y(d.Country_Code); })
             .attr("dx", 4)
@@ -160,7 +160,8 @@ function loadChart2(olympicId) {
             .style("alignment-baseline", "central")
             .text(function(d) { return computeTotalCumulativeMedails(d, olympicId); })
             .style("font-size", "9px")
-            .style("opacity", 0).transition().delay(7000).duration(2000).style("opacity", 0.8);
+            .style("opacity", 0).transition().delay(6250).duration(2500).style("opacity", 0.8);
+
 
         // Add color legend
         var colorLegend = svg.selectAll("colorlegend")
@@ -179,7 +180,7 @@ function loadChart2(olympicId) {
             .style("stroke-width", 0)
             .on("mouseover", filterContinents)
             .on("mouseout", filterContinentsOff)
-            .style("opacity", 0).transition().delay(3000).duration(2000).style("opacity", 0.8);
+            .style("opacity", 0).transition().delay(7000).duration(2000).style("opacity", 0.8);
 
         colorLegend.append("text")
             .attr("x", chart.width - y.bandwidth() - 10)
@@ -188,7 +189,16 @@ function loadChart2(olympicId) {
             .on("mouseover", filterContinents)
             .on("mouseout", filterContinentsOff)
             .text(function(d) { return d; })
-            .style("fill-opacity", 0).transition().delay(3500).duration(2500).style("fill-opacity", 0.7);
+            .style("fill-opacity", 0).transition().delay(6750).duration(2000).style("fill-opacity", 0.7);
+
+        // Add annotation text (hint)
+        svg.append("text")
+            .attr("x", chart.width / 2)
+            .attr("y", chart.height / 2)
+            .attr("class", "annotation2")
+            .style("text-anchor", "middle")
+            .text("Cumulative medal count until " + hostCity + " (" + hostYear + ")")
+            .style("opacity", 0).transition().delay(5750).duration(3000).style("opacity", 0.3);
 
     })
 
@@ -294,12 +304,24 @@ function loadChart2(olympicId) {
                 return (data.Continent != d)
             })
             .transition()
-            .style('opacity', 0.04)
+            .style('opacity', 0.05)
+
+        svg.selectAll('.datapoints')
+            .filter(function(data) {
+                return (data.Continent != d)
+            })
+            .transition()
+            .style('opacity', 0.05)
     }
 
     function filterContinentsOff(d) {
         svg.selectAll('.bar')
             .transition()
             .style('opacity', 0.8)
+
+        svg.selectAll('.datapoints')
+            .transition()
+            .style('opacity', 0.8)
     }
+
 }

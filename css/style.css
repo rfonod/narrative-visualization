@@ -46,6 +46,7 @@ svg {
 
 .annotation {
     animation: blinker 5s linear infinite;
+    animation-delay: 5s;
     animation-direction: alternate;
     text-align: left;
     font-family: Georgia, Helvetica, sans-serif, Arial;
@@ -55,9 +56,17 @@ svg {
 }
 
 @keyframes blinker {
-    70% {
-        opacity: 0.2;
+    100% {
+        opacity: 1;
     }
+}
+
+.annotation2 {
+    animation-direction: alternate;
+    font-family: Arial, Georgia, Helvetica, sans-serif;
+    font-size: 18pt;
+    font-weight: 500;
+    fill: rgba(255, 115, 0, 0.568);
 }
 
 .legendtext {

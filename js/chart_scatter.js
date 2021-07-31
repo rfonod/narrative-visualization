@@ -115,7 +115,7 @@ function loadChart1(olympicId) {
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + chart.height + ")")
-            .transition().duration(2000)
+            .transition().duration(1500)
             .call(xAxis);
 
         var yAxis = d3.axisLeft(y)
@@ -123,7 +123,7 @@ function loadChart1(olympicId) {
 
         svg.append("g")
             .attr("class", "y axis")
-            .transition().duration(2000)
+            .transition().duration(1500)
             .call(yAxis);
 
         // Add X and Y labels
@@ -158,8 +158,8 @@ function loadChart1(olympicId) {
 
         // Add radius and opacitytransitions
         dots.transition()
-            .delay(1000)
-            .duration(2500)
+            .delay(750)
+            .duration(2000)
             .attr("r", function(d) { return r(computeTotalMedails(d)); })
             .attr("cx", function(d) { return x(getPopulation(d)); })
             .attr("cy", function(d) { return y(getGDPperCapita(d)); });
@@ -182,7 +182,7 @@ function loadChart1(olympicId) {
             .attr("dy", function(d) { return -0.8 * r(computeTotalMedails(d)); })
             .text(function(d) { return d.Country_Code; })
             .style("font-size", "8px")
-            .style("opacity", 0).transition().delay(1000).duration(1000).style("opacity", 0.6);
+            .style("opacity", 0).transition().delay(500).duration(2000).style("opacity", 0.6);
 
         // Add color legend
         var colorLegend = svg.selectAll("colorlegend")
@@ -200,7 +200,7 @@ function loadChart1(olympicId) {
             .style("stroke-width", 0)
             .on("mouseover", filterContinents)
             .on("mouseout", filterContinentsOff)
-            .style("opacity", 0).transition().delay(2500).duration(2000).style("opacity", 0.8);
+            .style("opacity", 0).transition().delay(1500).duration(2000).style("opacity", 0.8);
 
         colorLegend.append("text")
             .attr("x", chart.width - 20)
@@ -210,7 +210,7 @@ function loadChart1(olympicId) {
             .on("mouseover", filterContinents)
             .on("mouseout", filterContinentsOff)
             .text(function(d) { return d; })
-            .style("fill-opacity", 0).transition().delay(3000).duration(2500).style("fill-opacity", 0.7);
+            .style("fill-opacity", 0).transition().delay(2000).duration(2000).style("fill-opacity", 0.7);
 
         // Add radius legend
         var xCircle = chart.width - 270;
@@ -232,7 +232,7 @@ function loadChart1(olympicId) {
             .style("fill", "none")
             .attr("stroke", "black")
             .attr("stroke-width", 0.7)
-            .style('stroke-opacity', 0).transition().delay(3000).duration(2500).style('stroke-opacity', 0.7);
+            .style('stroke-opacity', 0).transition().delay(2500).duration(2000).style('stroke-opacity', 0.7);
 
         radiLegend.append("line")
             .attr('x1', function(d) { return xCircle + r(d); })
@@ -240,7 +240,7 @@ function loadChart1(olympicId) {
             .attr('y1', function(d) { return yCircle - r(d); })
             .attr('y2', function(d) { return yCircle - r(d); })
             .attr('stroke', 'black')
-            .style('stroke-opacity', 0).transition().delay(3000).duration(3000).style('stroke-opacity', 0.7)
+            .style('stroke-opacity', 0).transition().delay(2250).duration(2000).style('stroke-opacity', 0.7)
             .attr("stroke-width", 0.5)
             .style('stroke-dasharray', ('2,1'))
 
@@ -251,24 +251,25 @@ function loadChart1(olympicId) {
             .text(function(d) { return d; })
             .style("font-size", 10)
             .attr('alignment-baseline', 'middle')
-            .style("fill-opacity", 0).transition().delay(3000).duration(3000).style("fill-opacity", 0.6);
+            .style("fill-opacity", 0).transition().delay(2000).duration(2000).style("fill-opacity", 0.6);
 
         svg.append("text")
             .attr('x', xCircle)
             .attr("y", yCircle + 13)
             .attr("class", "legendtext")
             .text("Medals count")
-            .style("fill-opacity", 0).transition().delay(3000).duration(2000).style("fill-opacity", 0.6);
+            .style("fill-opacity", 0).transition().delay(2500).duration(2000).style("fill-opacity", 0.6);
 
         // Add annotations (Hints)
-        var xAnnotation = 0.03 * chart.width;
-        var yAnnotation = -2;
+        var xAnnotation = chart.width / 2;
+        var yAnnotation = -3;
         svg.append("text")
             .attr("x", xAnnotation)
             .attr("y", yAnnotation)
             .attr("class", "annotation")
+            .style("text-anchor", "middle")
             .text("Tip 1: hover over the bubles for more details; Tip 2: hover over the color legend to filter continents")
-            .style("opacity", 0).transition().delay(7000).duration(2000).style("opacity", 0.8);
+            .style('opacity', 0);
 
         // Add annotations (Max medals)
         var xMaxcountry = chart.width / 2;
@@ -289,7 +290,7 @@ function loadChart1(olympicId) {
             .attr('y1', function(d) { return y(getGDPperCapita(d)); })
             .attr('y2', function(d) { return yMaxcountry; })
             .attr('stroke', 'black')
-            .style('stroke-opacity', 0).transition().delay(4000).duration(2000).style('stroke-opacity', 0.5)
+            .style('stroke-opacity', 0).transition().delay(2750).duration(2000).style('stroke-opacity', 0.5)
             .attr("stroke-width", 0.5)
             .style('stroke-dasharray', ('1,1'))
 
@@ -301,7 +302,7 @@ function loadChart1(olympicId) {
             .style("font-size", '9pt')
             .style('text-decoration', "underline")
             .style('text-anchor', "middle")
-            .style("fill-opacity", 0).transition().delay(4500).duration(2000).style("fill-opacity", 0.5);
+            .style("fill-opacity", 0).transition().delay(3000).duration(2000).style("fill-opacity", 0.5);
 
         // Add annotations (Hosting country)
         var xHostingcountry = chart.width / 3;
@@ -322,7 +323,7 @@ function loadChart1(olympicId) {
             .attr('y1', function(d) { return y(getGDPperCapita(d)); })
             .attr('y2', function(d) { return yHostingcountry; })
             .attr('stroke', 'black')
-            .style('stroke-opacity', 0).transition().delay(4000).duration(2000).style('stroke-opacity', 0.5)
+            .style('stroke-opacity', 0).transition().delay(3000).duration(2000).style('stroke-opacity', 0.5)
             .attr("stroke-width", 0.5)
             .style('stroke-dasharray', ('1,1'))
 
@@ -334,7 +335,7 @@ function loadChart1(olympicId) {
             .style("font-size", '9pt')
             .style('text-decoration', "underline")
             .style('text-anchor', "middle")
-            .style("fill-opacity", 0).transition().delay(4500).duration(2000).style("fill-opacity", 0.5);
+            .style("fill-opacity", 0).transition().delay(3250).duration(2000).style("fill-opacity", 0.6);
 
     })
 

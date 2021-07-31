@@ -2,6 +2,8 @@
 var sceneId = 0;
 var numberOfGames = Infinity; // number of summer/winter olympic games
 var hostCountry = '';
+var hostCity = '';
+var hostYear = '';
 var olympics = 0; // {0 - summer; 1 - winter}
 var dataPath = '';
 var venuePath = '';
@@ -122,6 +124,8 @@ function updateVenue(olympicId) {
                     data[i].Year + ')').style('background', olympics ? '#B3DAF1' : '#FFFE6F');
                 yearText_i = '<b style="border:2px; border-style:solid; border-color:#FF0000; border-radius: 3px; background-color :' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">') + data[i].Year + '</b>';
                 window.hostCountry = data[i].Country;
+                window.hostCity = data[i].City;
+                window.hostYear = data[i].Year;
             } else {
                 yearText_i = data[i].Year;
             }
