@@ -21,7 +21,8 @@ function loadChart2(olympicId) {
         // filter and sort data
         data = data.filter(function(d) {
             return (computeTotalCumulativeMedails(d, olympicId) !== 0);
-        })
+        });
+
         data.sort(function(b, a) {
             return computeTotalCumulativeMedails(a, olympicId) - computeTotalCumulativeMedails(b, olympicId);
         });
@@ -75,18 +76,18 @@ function loadChart2(olympicId) {
             tooltip.html(getTooltipInfo(d))
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 30) + "px");
-        }
+        };
 
         var mouseOn = function(d) {
             tooltip.style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 30) + "px");
-        }
+        };
 
         var mouseLeave = function(d) {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
-        }
+        };
 
         // Add X and Y axis
         svg.append("g")
@@ -200,7 +201,7 @@ function loadChart2(olympicId) {
             .text("Cumulative medal count until " + hostCity + " (" + hostYear + ")")
             .style("opacity", 0).transition().delay(5750).duration(3000).style("opacity", 0.3);
 
-    })
+    });
 
     function getPopulation(d) {
         var pop = 0;
@@ -225,7 +226,7 @@ function loadChart2(olympicId) {
         let gold_i;
         let silver_i;
 
-        const offset = 5 // column number from where the medal columns start
+        const offset = 5; // column number from where the medal columns start
         let index;
 
         for (let i = 1; i <= untilId; i++) {
@@ -293,7 +294,7 @@ function loadChart2(olympicId) {
             "&emsp;&#8226;<b>&emsp;Bronz medals:</b> " + bronze;
 
         if (d.Country == 'Germany') {
-            htmlInfo += '<br><br> * When applicable, West and East Germany<br> have been counted as a single country.'
+            htmlInfo += '<br><br> * When applicable, West and East Germany<br> have been counted as a single country.';
         }
         return htmlInfo;
     }
@@ -301,27 +302,27 @@ function loadChart2(olympicId) {
     function filterContinents(d) {
         svg.selectAll('.bar')
             .filter(function(data) {
-                return (data.Continent != d)
+                return (data.Continent != d);
             })
             .transition()
-            .style('opacity', 0.05)
+            .style('opacity', 0.05);
 
         svg.selectAll('.datapoints')
             .filter(function(data) {
-                return (data.Continent != d)
+                return (data.Continent != d);
             })
             .transition()
-            .style('opacity', 0.05)
+            .style('opacity', 0.05);
     }
 
     function filterContinentsOff(d) {
         svg.selectAll('.bar')
             .transition()
-            .style('opacity', 0.8)
+            .style('opacity', 0.8);
 
         svg.selectAll('.datapoints')
             .transition()
-            .style('opacity', 0.8)
+            .style('opacity', 0.8);
     }
 
 }

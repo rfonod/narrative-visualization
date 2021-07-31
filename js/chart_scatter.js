@@ -41,7 +41,7 @@ function loadChart1(olympicId) {
             function(d) {
                 return (getPopulation(d) !== 0 && getGDPperCapita(d) !== 0 && computeTotalMedails(d) !== 0);
             }
-        )
+        );
 
         // Calculate the extreme values for the selected olympics
         var pop_minmax = getMinMaxPopulation(data);
@@ -86,18 +86,18 @@ function loadChart1(olympicId) {
             tooltip.html(getTooltipInfo(d))
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 30) + "px");
-        }
+        };
 
         var mouseOn = function(d) {
             tooltip.style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 30) + "px");
-        }
+        };
 
         var mouseLeave = function(d) {
             tooltip.transition()
                 .duration(500)
                 .style("opacity", 0);
-        }
+        };
 
         // Add X axis
         var xTickValAll = [0.01, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100, 200, 500, 1000];
@@ -227,8 +227,8 @@ function loadChart1(olympicId) {
 
         radiLegend.append("circle")
             .attr("cx", xCircle)
-            .attr("cy", function(d) { return yCircle - r(d) })
-            .attr("r", function(d) { return r(d) })
+            .attr("cy", function(d) { return yCircle - r(d); })
+            .attr("r", function(d) { return r(d); })
             .style("fill", "none")
             .attr("stroke", "black")
             .attr("stroke-width", 0.7)
@@ -242,7 +242,7 @@ function loadChart1(olympicId) {
             .attr('stroke', 'black')
             .style('stroke-opacity', 0).transition().delay(2250).duration(2000).style('stroke-opacity', 0.7)
             .attr("stroke-width", 0.5)
-            .style('stroke-dasharray', ('2,1'))
+            .style('stroke-dasharray', ('2,1'));
 
         radiLegend.append("text")
             .attr('x', xLabel)
@@ -282,7 +282,7 @@ function loadChart1(olympicId) {
                 }
             ))
             .enter()
-            .append("g")
+            .append("g");
 
         maxCountry.append("line")
             .attr('x1', function(d) { return x(getPopulation(d)); })
@@ -292,12 +292,12 @@ function loadChart1(olympicId) {
             .attr('stroke', 'black')
             .style('stroke-opacity', 0).transition().delay(2750).duration(2000).style('stroke-opacity', 0.5)
             .attr("stroke-width", 0.5)
-            .style('stroke-dasharray', ('1,1'))
+            .style('stroke-dasharray', ('1,1'));
 
         maxCountry.append("text")
             .attr('x', xMaxcountry)
             .attr('dy', '-0.3em')
-            .attr('y', function(d) { return yMaxcountry; })
+            .attr('y', yMaxcountry)
             .text('Country with most medals')
             .style("font-size", '9pt')
             .style('text-decoration', "underline")
@@ -315,29 +315,29 @@ function loadChart1(olympicId) {
                 }
             ))
             .enter()
-            .append("g")
+            .append("g");
 
         hostingCountryAnnotation.append("line")
             .attr('x1', function(d) { return x(getPopulation(d)); })
             .attr('x2', xHostingcountry)
             .attr('y1', function(d) { return y(getGDPperCapita(d)); })
-            .attr('y2', function(d) { return yHostingcountry; })
+            .attr('y2', yHostingcountry)
             .attr('stroke', 'black')
             .style('stroke-opacity', 0).transition().delay(3000).duration(2000).style('stroke-opacity', 0.5)
             .attr("stroke-width", 0.5)
-            .style('stroke-dasharray', ('1,1'))
+            .style('stroke-dasharray', ('1,1'));
 
         hostingCountryAnnotation.append("text")
             .attr('x', xHostingcountry)
             .attr('dy', '-0.3em')
-            .attr('y', function(d) { return yHostingcountry; })
+            .attr('y', yHostingcountry)
             .text('Hosting country')
             .style("font-size", '9pt')
             .style('text-decoration', "underline")
             .style('text-anchor', "middle")
             .style("fill-opacity", 0).transition().delay(3250).duration(2000).style("fill-opacity", 0.6);
 
-    })
+    });
 
     function getPopulation(d) {
         var pop = 0;
@@ -353,7 +353,7 @@ function loadChart1(olympicId) {
     }
 
     function getMedails(d) {
-        const offset = 5 // column number from where the medal columns start
+        const offset = 5; // column number from where the medal columns start
         var index = offset + 3 * (olympicId - 1);
 
         var bronze = d3.values(d)[index];
@@ -456,7 +456,7 @@ function loadChart1(olympicId) {
             "&emsp;&#8226;<b>&emsp;Bronz medals:</b> " + bronze;
 
         if (d.Country == 'Germany') {
-            htmlInfo += '<br><br> * When applicable, West and East Germany<br> have been counted as a single country.'
+            htmlInfo += '<br><br> * When applicable, West and East Germany<br> have been counted as a single country.';
         }
         return htmlInfo;
     }
@@ -464,15 +464,15 @@ function loadChart1(olympicId) {
     function filterContinents(d) {
         svg.selectAll('.datapoints')
             .filter(function(data) {
-                return (data.Continent != d)
+                return (data.Continent != d);
             })
             .transition()
-            .style('opacity', 0.04)
+            .style('opacity', 0.04);
     }
 
     function filterContinentsOff(d) {
         svg.selectAll('.datapoints')
             .transition()
-            .style('opacity', 0.8)
+            .style('opacity', 0.8);
     }
 }

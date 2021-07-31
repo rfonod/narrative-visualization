@@ -18,7 +18,7 @@ function homeScene() {
     document.getElementById("bs").innerHTML = "Explore Summer Olympics";
     document.getElementById("bw").innerHTML = "Explore Winter Olympics";
     document.getElementById("bh").innerHTML = "";
-    clearVenueYearsChart()
+    clearVenueYearsChart();
     document.getElementById("introDivId").style.display = "block";
 }
 
@@ -106,9 +106,9 @@ function updateVenue(olympicId) {
 
         var olympicsType = '';
         if (olympics) {
-            olympicsType = 'Winter'
+            olympicsType = 'Winter';
         } else {
-            olympicsType = 'Summer'
+            olympicsType = 'Summer';
         }
 
         window.numberOfGames = data.length;
