@@ -194,14 +194,23 @@ h4 {
 }
 
 circle {
-    stroke: black;
-    stroke-width: 0.5;
+    stroke: rgba(26, 23, 23, 0.568);
+    stroke-width: 1px;
     shape-rendering: geometricPrecision;
 }
 
-.bar {
+circle:hover {
     stroke: black;
-    stroke-width: 0.5;
+    stroke-width: 2px;
+}
+
+.bar {
+    stroke: rgba(26, 23, 23, 0.568);
+    stroke-width: 1px;
+}
+
+.bar:hover {
+    stroke-width: 2px;
 }
 
 .axis line {

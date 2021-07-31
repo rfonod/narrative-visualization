@@ -128,7 +128,7 @@ function loadChart1(olympicId) {
 
         // Add X and Y labels
         svg.append('g')
-            .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + margin.top + margin.bottom - 20) + ')')
+            .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + margin.top + margin.bottom - 18) + ')')
             .append('text')
             .style("opacity", 0).transition().duration(2000).style("opacity", 1)
             .attr("class", "x label")
