@@ -32,7 +32,7 @@ function loadChart2(olympicId) {
         const width = 0.85 * x_size;
         const height = 50 + (allActiveCountries / allCountries) * (olympics ? 500 : 1400);
         const canvas = { width: width, height: height };
-        const margin = { left: 65, right: 50, top: 0, bottom: 45 };
+        const margin = { left: 65, right: 52, top: 0, bottom: 45 };
         const chart = {
             width: canvas.width - (margin.right + margin.left),
             height: canvas.height - (margin.top + margin.bottom)

@@ -11,7 +11,7 @@ function loadChart1(olympicId) {
     const width = 0.85 * x_size;
     const height = (0.5 * x_size < 0.62 * y_size) ? 0.5 * x_size : 0.62 * y_size;
     const canvas = { width: width, height: height };
-    const margin = { left: 65, right: 50, top: 12, bottom: 36 };
+    const margin = { left: 65, right: 52, top: 12, bottom: 36 };
     const chart = {
         width: canvas.width - (margin.right + margin.left),
         height: canvas.height - (margin.top + margin.bottom)
