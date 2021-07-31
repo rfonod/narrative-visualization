@@ -57,12 +57,13 @@ function previousScene() {
         clearVenueYearsChart();
         loadChart1(sceneId);
         loadChart2(sceneId);
-        setTimeout(function() {
-            document.getElementById("bp").disabled = false;
-        }, 200);
     }
     if (sceneId == 1) {
         document.getElementById("bp").disabled = true;
+    } else {
+        setTimeout(function() {
+            document.getElementById("bp").disabled = false;
+        }, 200);
     }
 }
 
@@ -75,16 +76,17 @@ function nextScene() {
         updateVenue(sceneId);
         loadChart1(sceneId);
         loadChart2(sceneId);
-        setTimeout(function() {
-            document.getElementById("bn").disabled = false;
-        }, 200);
 
-    }
-    if (sceneId >= numberOfGames) {
-        document.getElementById("bn").disabled = true;
     }
     if (sceneId == 1) {
         document.getElementById("bp").disabled = true;
+    }
+    if (sceneId >= numberOfGames) {
+        document.getElementById("bn").disabled = true;
+    } else {
+        setTimeout(function() {
+            document.getElementById("bn").disabled = false;
+        }, 200);
     }
 }
 

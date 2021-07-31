@@ -11,7 +11,7 @@ function loadChart1(olympicId) {
     const width = 0.85 * x_size;
     const height = (0.5 * x_size < 0.62 * y_size) ? 0.5 * x_size : 0.62 * y_size;
     const canvas = { width: width, height: height };
-    const margin = { left: 65, right: 50, top: 12, bottom: 35 };
+    const margin = { left: 65, right: 50, top: 12, bottom: 36 };
     const chart = {
         width: canvas.width - (margin.right + margin.left),
         height: canvas.height - (margin.top + margin.bottom)
@@ -128,7 +128,7 @@ function loadChart1(olympicId) {
 
         // Add X and Y labels
         svg.append('g')
-            .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + margin.top + margin.bottom - 18) + ')')
+            .attr('transform', 'translate(' + (chart.width / 2) + ', ' + (chart.height + 32) + ')')
             .append('text')
             .style("opacity", 0).transition().duration(2000).style("opacity", 1)
             .attr("class", "x label")
@@ -150,17 +150,19 @@ function loadChart1(olympicId) {
             .enter()
             .append("circle")
             .attr("class", "datapoints")
-            .attr("cx", function(d) { return x(getPopulation(d)); })
-            .attr("cy", function(d) { return y(getGDPperCapita(d)); })
+            .attr("cx", 0)
+            .attr("cy", (chart.height))
             .attr("r", 0)
             .style("fill", function(d) { return c(d.Continent); })
             .style("opacity", 0.8);
 
-        // Add radius transitions
+        // Add radius and opacitytransitions
         dots.transition()
-            .delay(1500)
+            .delay(1000)
             .duration(2500)
-            .attr("r", function(d) { return r(computeTotalMedails(d)); });
+            .attr("r", function(d) { return r(computeTotalMedails(d)); })
+            .attr("cx", function(d) { return x(getPopulation(d)); })
+            .attr("cy", function(d) { return y(getGDPperCapita(d)); });
 
         // Add mouse events
         dots.on("mouseover", mouseOver)

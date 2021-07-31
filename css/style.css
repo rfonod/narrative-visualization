@@ -45,7 +45,7 @@ svg {
 }
 
 .annotation {
-    animation: blinker 8s linear infinite;
+    animation: blinker 5s linear infinite;
     animation-direction: alternate;
     text-align: left;
     font-family: Georgia, Helvetica, sans-serif, Arial;
@@ -55,8 +55,8 @@ svg {
 }
 
 @keyframes blinker {
-    50% {
-        opacity: 0;
+    70% {
+        opacity: 0.2;
     }
 }
 
