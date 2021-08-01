@@ -48,30 +48,14 @@ function initVisualization() {
     document.getElementById("bs").innerHTML = "";
     document.getElementById("bw").innerHTML = "";
     document.getElementById("introDivId").style.display = "none";
-    nextScene();
+    nextScene(0);
     d3.select("#sourceDivId").html("<p>*Original data source: <a href='https://www.kaggle.com/the-guardian/olympic-games'>https://www.kaggle.com/the-guardian/olympic-games</a></p>");
 }
 
-function previousScene() {
-    if (sceneId > 1) {
-        sceneId -= 1;
-        document.getElementById("bp").disabled = true;
-        document.getElementById("bn").disabled = false;
-        updateVenue(sceneId);
-        clearVenueYearsChart();
-        loadChart1(sceneId);
-        loadChart2(sceneId);
+function nextScene(clickId) {
+    if (clickId != 0) {
+        sceneId = clickId - 1;
     }
-    if (sceneId == 1) {
-        document.getElementById("bp").disabled = true;
-    } else {
-        setTimeout(function() {
-            document.getElementById("bp").disabled = false;
-        }, 200);
-    }
-}
-
-function nextScene() {
     if (sceneId < numberOfGames) {
         sceneId += 1;
         document.getElementById("bp").disabled = false;
@@ -93,6 +77,27 @@ function nextScene() {
         }, 200);
     }
 }
+
+function previousScene() {
+    if (sceneId > 1) {
+        sceneId -= 1;
+        document.getElementById("bp").disabled = true;
+        document.getElementById("bn").disabled = false;
+        updateVenue(sceneId);
+        clearVenueYearsChart();
+        loadChart1(sceneId);
+        loadChart2(sceneId);
+    }
+    if (sceneId == 1) {
+        document.getElementById("bp").disabled = true;
+    } else {
+        setTimeout(function() {
+            document.getElementById("bp").disabled = false;
+        }, 200);
+    }
+}
+
+
 
 function clearVenueYearsChart() {
     d3.select("#venueDivId").selectAll('h2').remove();
@@ -120,7 +125,8 @@ function updateVenue(olympicId) {
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].ID < olympicId) {
-                yearText_i = '<b style="background-color : ' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">') + data[i].Year + '</b>';
+                yearText_i = '<b style="background-color : ' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">'); // + data[i].Year + '</b>';
+                yearText_i += '<a href="javascript:nextScene(' + (i + 1) + ')">' + data[i].Year + '</a></b>';
             } else if (data[i].ID == olympicId) {
                 d3.select("#venueDivId").insert("h2").text(olympicsType + ' Olympics in ' + data[i].City + ' (' +
                     data[i].Year + ')').style('background', olympics ? '#B3DAF1' : '#FFFE6F');
@@ -129,7 +135,8 @@ function updateVenue(olympicId) {
                 window.hostCity = data[i].City;
                 window.hostYear = data[i].Year;
             } else {
-                yearText_i = data[i].Year;
+                //yearText_i = data[i].Year;
+                yearText_i = '<a href="javascript:nextScene(' + (i + 1) + ')">' + data[i].Year + '</a>';
             }
             if (data[i].ID < olympicId) {
                 yearText_i += '<b style="background-color : ' + (olympics ? '#B3DAF1;">' : '#FFFE6F;">') + ((i < data.length - 1) ? ' | ' : '') + '</b>';

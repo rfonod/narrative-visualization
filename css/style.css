@@ -160,6 +160,28 @@ button[disabled] {
     margin: auto;
 }
 
+#yearsDivId a:link {
+    color: #293929;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#yearsDivId a:visited {
+    color: #293929;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#yearsDivId a:hover {
+    color: red;
+    background-color: transparent;
+}
+
+#yearsDivId a:active {
+    color: #293929;
+    background-color: transparent;
+}
+
 #sourceDivId p {
     font-family: 'Helvetica Neue', Helvetica, Charcoal, sans-serif, Arial;
     text-align: left;
