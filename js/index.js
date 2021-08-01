@@ -20,6 +20,7 @@ function homeScene() {
     document.getElementById("bh").innerHTML = "";
     clearVenueYearsChart();
     document.getElementById("introDivId").style.display = "block";
+    d3.select("#sourceDivId").html("");
 }
 
 function summerOlympics() {
@@ -48,6 +49,7 @@ function initVisualization() {
     document.getElementById("bw").innerHTML = "";
     document.getElementById("introDivId").style.display = "none";
     nextScene();
+    d3.select("#sourceDivId").html("<p>*Original data source: <a href='https://www.kaggle.com/the-guardian/olympic-games'>https://www.kaggle.com/the-guardian/olympic-games</a></p>");
 }
 
 function previousScene() {
@@ -114,7 +116,7 @@ function updateVenue(olympicId) {
         window.numberOfGames = data.length;
         var yearText_i = '';
         var yearText = '';
-        yearText = '<p><b>' + olympicsType + ' Olympic games:</b> ';
+        yearText = '<p><b>' + olympicsType + ' Olympic games*:</b> ';
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].ID < olympicId) {

@@ -133,7 +133,7 @@ function loadChart1(olympicId) {
             .style("opacity", 0).transition().duration(2000).style("opacity", 1)
             .attr("class", "x label")
             .attr('text-anchor', 'middle')
-            .text("Population (in milions, log scale)");
+            .text("Current population (in milions, log scale)");
 
         svg.append('g')
             .attr('transform', 'translate(' + (-margin.left + 15) + ', ' + (chart.height / 2 + margin.top) + ')')
@@ -141,7 +141,7 @@ function loadChart1(olympicId) {
             .attr("class", "y label")
             .attr('text-anchor', 'middle')
             .attr("transform", "rotate(-90)")
-            .text("GDP per Capita (in USD)")
+            .text("Current GDP per Capita (in USD)")
             .style("opacity", 0).transition().duration(2000).style("opacity", 1);
 
         // Add circles

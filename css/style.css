@@ -160,6 +160,15 @@ button[disabled] {
     margin: auto;
 }
 
+#sourceDivId p {
+    font-family: 'Helvetica Neue', Helvetica, Charcoal, sans-serif, Arial;
+    text-align: left;
+    width: 85%;
+    position: relative;
+    color: #293929;
+    font-size: 65%;
+}
+
 p {
     font-family: 'Helvetica Neue', Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif, Times, serif;
     font-size: 90%;
